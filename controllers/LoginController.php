@@ -1,10 +1,10 @@
 <?php
 namespace Controllers;
 
-use Model\Usuario;
+
 use MVC\Router;
 use Clases\Email;
-use RegexIterator;
+use Model\Usuario;
 
 class LoginController{
     public static function login(Router $router){
@@ -24,6 +24,7 @@ class LoginController{
                 if($usuario){
                     if($usuario->comprobarPasswordAndVerificado($auth->password)){
                         //autenticar al usuario
+                        
 
                         session_start();
 
