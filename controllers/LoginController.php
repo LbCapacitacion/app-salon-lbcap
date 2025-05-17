@@ -19,6 +19,8 @@ class LoginController{
             
             if(empty($alertas)){
                 //comprobar qu eel usuario existe
+                // Comprobar que el usuario existe
+                /** @var ?Usuario $usuario */
                 $usuario = Usuario::where('email', $auth->email);
 
                 if($usuario){
@@ -71,6 +73,7 @@ class LoginController{
             $auth = new Usuario($_POST);
             $alertas = $auth->validarEmail();
             if(empty($alertas)){
+                /** @var ?Usuario $usuario */
                 $usuario = Usuario::where('email', $auth->email);
                 if($usuario && $usuario->confirmado === "1"){
                     //generar un token
@@ -104,6 +107,7 @@ class LoginController{
         $token = s($_GET['token']);
 
         //buscar usuario por su token
+        /** @var ?Usuario $usuario */
         $usuario = Usuario::where('token', $token);
 
         if(empty($usuario)){
@@ -197,11 +201,12 @@ class LoginController{
 
         $token = s($_GET['token']);
         
-
+    /** @var ?Usuario $usuario */
         $usuario = Usuario::where('token',$token);
 
         if(empty($usuario)){
             //mostrar mensaje de error
+            
             Usuario::setAlerta('error', 'Token no valido');
 
         }else{
